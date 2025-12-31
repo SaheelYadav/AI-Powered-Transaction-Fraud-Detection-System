@@ -6,29 +6,19 @@ The AI-Powered Transaction Fraud Detection System is a real-time financial fraud
 The system continuously ingests transactions, evaluates fraud risk using multiple models, visualizes insights through an interactive dashboard, and generates Suspicious Activity Reports (SAR) in PDF format.
 
 This project follows industry-grade architecture and demonstrates concepts from:
-
 Cybersecurity
-
 Machine Learning
-
 Data Science
-
 Web Application Development
-
 Model Monitoring & Drift Detection
 
 🎯 Key Objectives
 
 Detect fraudulent financial transactions in real time
-
 Combine multiple ML models for higher accuracy
-
 Provide explainability for fraud predictions
-
 Visualize risk trends and transaction networks
-
 Generate regulatory-ready SAR reports
-
 Support continuous model monitoring and improvement
 
 🧠 System Architecture
@@ -36,54 +26,36 @@ Support continuous model monitoring and improvement
 Frontend
 
 HTML5, CSS3, Bootstrap 5
-
 Chart.js (Risk charts & trends)
-
 Vis.js (Transaction network graph)
-
 JavaScript (Real-time updates)
 
 Backend
 
 Flask (Python web framework)
-
 REST APIs for data exchange
-
 Background threads for live transaction simulation
-
 Machine Learning
-
 Isolation Forest (Anomaly Detection)
-
 XGBoost (Supervised Fraud Classification)
-
 Graph Neural Network (Relationship-based fraud detection)
-
 SHAP (Explainable AI)
-
 Other Components
-
 Concept Drift Detection
-
 AutoML-based retraining
-
 SAR PDF generation using ReportLab
 
 🧩 Core Features
 🔹 Real-Time Transaction Monitoring
 
 Live transaction feed
-
 Automatic refresh every few seconds
-
 Risk-based color coding
 
 🔹 Fraud Detection Models
 
 Isolation Forest – Detects anomalies
-
 XGBoost – Predicts fraud probability
-
 GNN – Detects suspicious account-merchant-device relationships
 
 🔹 Composite Risk Scoring
@@ -91,57 +63,41 @@ GNN – Detects suspicious account-merchant-device relationships
 A weighted risk score combining:
 
 Isolation Forest score
-
 XGBoost probability
-
 GNN probability
-
 Customer risk profile
 
 🔹 Explainable AI (SHAP)
 
 Displays top contributing risk features
-
 Improves transparency and trust
-
 Helps analysts understand why a transaction is flagged
 
 🔹 Risk Visualization Dashboard
 
 Risk distribution (Low / Medium / High)
-
 Average risk trends
-
 Top risk indicators
-
 Interactive transaction table
 
 🔹 Transaction Network Graph
 
 Visualizes relationships between:
-
 Accounts
-
 Merchants
-
 Devices
-
 Helps identify fraud rings and suspicious behavior
 
 🔹 Suspicious Activity Report (SAR)
 
 One-click SAR generation
-
 Automatically includes high-risk transactions
-
 Downloadable PDF report
 
 🔹 Concept Drift Detection
 
 Monitors data distribution changes
-
 Flags model drift risks
-
 Supports long-term model reliability
 
 📁 Project Directory Structure
@@ -193,21 +149,15 @@ python app.py
 4️⃣ Access the Dashboard
 
 Open your browser and visit:
-
 http://127.0.0.1:5000
 
 🧪 How the System Works (Execution Flow)
 
 Dummy or real transactions are generated
-
 Data is sent to backend APIs
-
 ML models compute fraud risk
-
 SHAP explains model decisions
-
 Dashboard updates in real time
-
 High-risk transactions trigger SAR reports
 
 📊 APIs Overview
@@ -216,26 +166,20 @@ Endpoint	Method	Description
 /api/analyze	POST	Analyze a transaction
 /api/reports/sar	POST	Generate SAR PDF
 /api/drift/status	GET	Concept drift status
+
 🔒 Security Considerations
 
 Backend APIs are modular and extendable
-
 Can be integrated with authentication systems
-
 Ready for production-grade deployment
 
 🚀 Future Enhancements
 
 User authentication & role-based access
-
 Database integration (PostgreSQL / MongoDB)
-
 Real banking transaction feeds
-
 Advanced fraud pattern learning
-
 Cloud deployment (AWS / Azure)
-
 SOC-style alerting system
 
 🎓 Academic Relevance
@@ -243,23 +187,16 @@ SOC-style alerting system
 This project demonstrates:
 
 Applied Machine Learning
-
 Cybersecurity analytics
-
 Explainable AI
-
 Full-stack development
-
 Real-time monitoring systems
 
 Suitable for:
 
 Major Project
-
 Final Year Project
-
 Capstone Project
-
 Research-oriented submissions
 
 👤 Author
