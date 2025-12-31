@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/588265755531758591/0d42202ebbf14102b9771574825528e2/artifacts
+end_time: 1766473160955
+entry_point_name: ''
+experiment_id: '588265755531758591'
+lifecycle_stage: active
+run_id: 0d42202ebbf14102b9771574825528e2
+run_name: isolation_forest_2025-12-23 12:29:15.631115
+run_uuid: 0d42202ebbf14102b9771574825528e2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766473155636
+status: 3
+tags: []
+user_id: Saheel Yadav

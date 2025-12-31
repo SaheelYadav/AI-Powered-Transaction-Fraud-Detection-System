@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.env/
+
+# ML / Data
+data/
+reports/
+*.csv
+*.log
+
+# Model artifacts (optional – keep if asked by reviewer)
+trained_models/*.pkl
+models/*.pt
+
+# OS
+.DS_Store
+Thumbs.db

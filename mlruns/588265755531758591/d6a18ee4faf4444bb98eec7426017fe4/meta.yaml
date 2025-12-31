@@ -1,0 +1,15 @@
+artifact_uri: mlflow-artifacts:/588265755531758591/d6a18ee4faf4444bb98eec7426017fe4/artifacts
+end_time: 1766478461508
+entry_point_name: ''
+experiment_id: '588265755531758591'
+lifecycle_stage: active
+run_id: d6a18ee4faf4444bb98eec7426017fe4
+run_name: xgboost_2025-12-23 13:57:35.160192
+run_uuid: d6a18ee4faf4444bb98eec7426017fe4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1766478455183
+status: 3
+tags: []
+user_id: Saheel Yadav
