@@ -1,11 +1,14 @@
 services:
-  # Main Fraud Detection Application
+  # Main Fraud Detection Application (Minimal Version)
   - type: web
     name: fraud-detection-app
     env: docker
     plan: free
-    dockerfilePath: ./Dockerfile
+    dockerfilePath: ./Dockerfile.render
+    dockerContext: .
     autoDeploy: true
+    healthCheckPath: /api/health
+    healthCheckTimeout: 30
     envVars:
       - key: FLASK_ENV
         value: production
