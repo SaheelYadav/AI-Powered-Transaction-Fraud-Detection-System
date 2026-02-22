@@ -11,6 +11,9 @@ numpy==1.24.3
 scikit-learn==1.3.0
 joblib==1.3.2
 
+# PDF Generation (lightweight)
+reportlab==4.0.4
+
 # HTTP and Utilities
 requests==2.31.0
 python-dateutil==2.8.2

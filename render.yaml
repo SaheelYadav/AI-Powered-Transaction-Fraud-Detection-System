@@ -16,3 +16,5 @@ services:
         value: "1"
       - key: PORT
         value: 10000
+      - key: FLASK_APP
+        value: app_minimal.py
