@@ -1,12 +1,11 @@
 services:
-  # Main Fraud Detection Application (Minimal Version)
+  # Main Fraud Detection Application (Original with full dependencies)
   - type: web
     name: fraud-detection-app
     env: docker
     plan: free
-    dockerfilePath: ./Dockerfile.render
+    dockerfilePath: ./Dockerfile
     dockerContext: .
-    dockerIgnorePath: .dockerignore.render
     autoDeploy: true
     healthCheckPath: /api/health
     healthCheckTimeout: 30
@@ -17,5 +16,3 @@ services:
         value: "1"
       - key: PORT
         value: 10000
-      - key: FLASK_APP
-        value: app_minimal.py
