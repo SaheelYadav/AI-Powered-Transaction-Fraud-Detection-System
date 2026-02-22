@@ -15,8 +15,9 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY . .
+# Copy only necessary files
+COPY app_minimal.py .
+COPY templates/ ./templates/
 
 # Create necessary directories
 RUN mkdir -p reports data

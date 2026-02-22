@@ -6,6 +6,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile.render
     dockerContext: .
+    dockerIgnorePath: .dockerignore.render
     autoDeploy: true
     healthCheckPath: /api/health
     healthCheckTimeout: 30

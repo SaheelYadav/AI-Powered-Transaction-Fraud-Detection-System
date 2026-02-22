@@ -1,0 +1,33 @@
+# Ignore everything except what we need
+*
+
+# But keep these files
+!app_minimal.py
+!requirements.txt
+!templates/
+!templates/dashboard.html
+!Dockerfile.render
+
+# Ignore the problematic files
+app.py
+graph_models/
+models/
+drift/
+profiling/
+reporting/
+fraud_detection.ipynb
+mlruns/
+mlartifacts/
+trained_models/
+venv/
+.git/
+.gitignore
+*.md
+!README.md
+docker-compose.yml
+nginx.conf
+railway.toml
+render.yaml
+start-project.*
+DOCKER-*
+STARTUP.md
