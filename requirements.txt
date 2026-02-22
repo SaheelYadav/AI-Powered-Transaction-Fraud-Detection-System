@@ -21,8 +21,9 @@ shap==0.42.1
 # MLflow
 mlflow==2.7.1
 
-# PDF Generation (lightweight)
+# PDF Generation
 reportlab==4.0.4
+pdfkit==0.6.1
 
 # HTTP and Utilities
 requests==2.31.0
