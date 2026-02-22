@@ -11,8 +11,8 @@ numpy==1.24.3
 scikit-learn==1.3.0
 joblib==1.3.2
 
-# Deep Learning (Python 3.8 compatible CPU version)
-torch==1.13.1
+# Deep Learning (smaller, stable version)
+torch==1.9.1
 torch-geometric==2.3.1
 
 # Explainable AI
