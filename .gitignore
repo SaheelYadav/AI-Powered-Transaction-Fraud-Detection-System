@@ -13,10 +13,27 @@ reports/
 *.csv
 *.log
 
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
+
 # Model artifacts (optional – keep if asked by reviewer)
-trained_models/*.pkl
-models/*.pt
+# trained_models/*.pkl
+# models/*.pt
 
 # OS
 .DS_Store
 Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Requirements backup
+requirments.txt
