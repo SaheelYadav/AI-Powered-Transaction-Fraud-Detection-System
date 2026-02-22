@@ -2,23 +2,14 @@ services:
   # Main Fraud Detection Application
   - type: web
     name: fraud-detection-app
-    env: python
+    env: docker
     plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python app.py
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
     envVars:
       - key: FLASK_ENV
         value: production
       - key: PYTHONUNBUFFERED
         value: "1"
-    
-  # MLflow Service (Optional)
-  - type: web
-    name: mlflow-server
-    env: python
-    plan: free
-    buildCommand: pip install mlflow
-    startCommand: mlflow server --host 0.0.0.0 --port $PORT --backend-store-uri sqlite:///mlflow.db
-    envVars:
       - key: PORT
         value: 10000

@@ -62,17 +62,38 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Initialize components
-iso_forest = joblib.load('trained_models/isolation_forest.pkl')
-xgb = joblib.load('trained_models/xgboost.pkl')
+# Initialize components with error handling
+try:
+    iso_forest = joblib.load('models/isolation_forest.pkl')
+except FileNotFoundError:
+    print("Warning: Isolation Forest model not found. Creating dummy model.")
+    iso_forest = None
+
+try:
+    xgb = joblib.load('models/xgboost.pkl')
+except FileNotFoundError:
+    print("Warning: XGBoost model not found. Creating dummy model.")
+    xgb = None
+
 # Load SHAP explainer if available (optional)
 try:
-    shap_explainer = joblib.load('trained_models/shap_explainer.pkl')
+    shap_explainer = joblib.load('models/shap_explainer.pkl')
 except FileNotFoundError:
     shap_explainer = None
     print("SHAP explainer not found. Continuing without explainability.")
-gnn_model = load_gnn_model('models/gnn_model.pt')
-graph_builder = TransactionGraphBuilder()
+
+try:
+    gnn_model = load_gnn_model('models/gnn_model.pt')
+except Exception as e:
+    print(f"Warning: GNN model not found or failed to load: {e}")
+    gnn_model = None
+
+try:
+    graph_builder = TransactionGraphBuilder()
+except Exception as e:
+    print(f"Warning: Graph builder failed to initialize: {e}")
+    graph_builder = None
+
 report_generator = ReportGenerator()
 profiler = CustomerRiskProfiler()
 drift_detector = ConceptDriftDetector()
@@ -170,14 +191,34 @@ def analyze_transaction():
     # Check for concept drift
     drift_detector.add_data(X.values[0])
     
-    # Get predictions
-    iso_score = -iso_forest.decision_function(X)[0]
-    xgb_prob = xgb.predict_proba(X)[0, 1]
+    # Get predictions with error handling
+    iso_score = 0.5
+    xgb_prob = 0.5
+    gnn_prob = 0.5
+    
+    if iso_forest is not None:
+        try:
+            iso_score = -iso_forest.decision_function(X)[0]
+        except Exception as e:
+            print(f"Isolation Forest prediction failed: {e}")
+            iso_score = 0.5
+    
+    if xgb is not None:
+        try:
+            xgb_prob = xgb.predict_proba(X)[0, 1]
+        except Exception as e:
+            print(f"XGBoost prediction failed: {e}")
+            xgb_prob = 0.5
     
     # GNN prediction
-    graph_data = graph_builder.add_transaction(data)
-    with torch.no_grad():
-        gnn_prob = gnn_model(graph_data.x, graph_data.edge_index).item()
+    if gnn_model is not None and graph_builder is not None:
+        try:
+            graph_data = graph_builder.add_transaction(data)
+            with torch.no_grad():
+                gnn_prob = gnn_model(graph_data.x, graph_data.edge_index).item()
+        except Exception as e:
+            print(f"GNN prediction failed: {e}")
+            gnn_prob = 0.5
     
     explanation = []
     
@@ -300,7 +341,10 @@ if __name__ == '__main__':
     os.makedirs("reports", exist_ok=True)
     os.makedirs("data", exist_ok=True)
     
-    # Initialize MLflow
-    mlflow.set_tracking_uri("http://localhost:5001")
+    # Initialize MLflow (optional for production)
+    try:
+        mlflow.set_tracking_uri(os.environ.get('MLFLOW_TRACKING_URI', "http://localhost:5001"))
+    except:
+        print("MLflow not available, continuing without it...")
     
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
