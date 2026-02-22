@@ -1,7 +1,8 @@
-version: '3'
+version: '3.8'
+
 services:
   mlflow:
-    image: python:3.8
+    image: python:3.8-slim
     command: >
       sh -c "pip install mlflow &&
       mlflow server --backend-store-uri sqlite:///mlflow.db
@@ -13,15 +14,37 @@ services:
     volumes:
       - ./mlruns:/mlruns
       - ./mlflow.db:/mlflow.db
+    restart: unless-stopped
 
   dashboard:
     build: .
     ports:
-      - "5001:5001"
+      - "5001:5000"
     depends_on:
       - mlflow
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
+      - FLASK_ENV=production
     volumes:
       - ./models:/app/models
       - ./data:/app/data
+      - ./reports:/app/reports
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl:/etc/nginx/ssl
+    depends_on:
+      - dashboard
+    restart: unless-stopped

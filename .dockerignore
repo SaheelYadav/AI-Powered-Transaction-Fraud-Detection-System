@@ -1,0 +1,41 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+venv/
+.env/
+
+# MLflow
+mlruns/
+mlartifacts/
+mlflow.db
+
+# Data
+data/
+reports/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Documentation
+README.md
+docs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

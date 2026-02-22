@@ -1,0 +1,27 @@
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "python app.py"
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[env]
+FLASK_ENV = "production"
+PYTHONUNBUFFERED = "1"
+
+[[services]]
+name = "web"
+
+[services.web]
+source = "."
+[services.web.build]
+builder = "nixpacks"
+
+[services.web.environment]
+FLASK_ENV = "production"
+PYTHONUNBUFFERED = "1"
+
+[[services.ports]]
+port = 5000
+handler = "http"
