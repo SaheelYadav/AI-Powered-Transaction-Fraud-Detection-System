@@ -1,5 +1,5 @@
 services:
-  # Main Fraud Detection Application (Original with full dependencies)
+  # Main Fraud Detection Application (Memory Optimized)
   - type: web
     name: fraud-detection-app
     env: docker
@@ -8,7 +8,7 @@ services:
     dockerContext: .
     autoDeploy: true
     healthCheckPath: /api/health
-    healthCheckTimeout: 30
+    healthCheckTimeout: 60
     envVars:
       - key: FLASK_ENV
         value: production
@@ -16,3 +16,5 @@ services:
         value: "1"
       - key: PORT
         value: 10000
+      - key: WEB_CONCURRENCY
+        value: "1"

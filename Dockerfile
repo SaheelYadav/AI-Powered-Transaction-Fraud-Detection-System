@@ -35,5 +35,5 @@ ENV PYTHONUNBUFFERED=1
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:5000/ || exit 1
 
-# Run application with gunicorn for production
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "2", "--timeout", "120", "--max-requests", "1000", "--max-requests-jitter", "50", "app:app"]
+# Run application with gunicorn optimized for memory constraints
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "300", "--max-requests", "100", "--max-requests-jitter", "10", "--preload", "app:app"]
