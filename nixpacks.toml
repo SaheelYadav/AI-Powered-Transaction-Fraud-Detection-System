@@ -1,15 +1,2 @@
-[phases.setup]
-nixPkgs = ["python38", "gcc"]
-
-[phases.install]
-cmds = [
-  "python -m pip install --upgrade pip",
-  "pip install --no-cache-dir -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cpu"
-]
-
-[start]
-cmd = "gunicorn --bind 0.0.0.0:$PORT --workers 1 --timeout 300 --max-requests 100 --preload app:app"
-
-[variables]
-PYTHONUNBUFFERED = "1"
-FLASK_ENV = "production"
+[python]
+enablePipCache = false
