@@ -1,0 +1,43 @@
+---
+title: AI Fraud Detection System
+emoji: 🛡️
+colorFrom: red
+colorTo: blue
+sdk: docker
+pinned: false
+license: mit
+app_port: 5000
+---
+
+# AI-Powered Transaction Fraud Detection System
+
+A production-grade, real-time financial fraud detection system that combines multiple machine learning approaches with explainable AI to identify suspicious transactions with high accuracy and transparency.
+
+## Features
+
+- 🔍 Real-time transaction monitoring
+- 🧠 Multi-model fraud detection (Isolation Forest, XGBoost, Graph Neural Networks)
+- 🎯 Explainable AI with SHAP values
+- 📊 Advanced analytics dashboard
+- 📋 Regulatory compliance reporting
+- 🔄 Continuous learning with drift detection
+
+## Models Used
+
+- **Isolation Forest**: Anomaly detection
+- **XGBoost**: Supervised classification  
+- **Graph Neural Networks**: Relationship-based fraud detection
+
+## API Endpoints
+
+- `/` - Main dashboard
+- `/api/analyze` - Analyze transaction for fraud
+- `/api/transactions` - Get recent transactions
+- `/api/reports/sar` - Generate SAR report
+
+## Tech Stack
+
+- **Backend**: Flask, Python 3.8
+- **ML**: PyTorch, scikit-learn, XGBoost
+- **Frontend**: HTML5, Bootstrap, Chart.js
+- **Deployment**: Docker, Hugging Face Spaces
