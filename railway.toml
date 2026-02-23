@@ -9,21 +9,3 @@ restartPolicyMaxRetries = 10
 [env]
 FLASK_ENV = "production"
 PYTHONUNBUFFERED = "1"
-PORT = "5000"
-
-[[services]]
-name = "web"
-
-[services.web]
-source = "."
-[services.web.build]
-builder = "nixpacks"
-
-[services.web.environment]
-FLASK_ENV = "production"
-PYTHONUNBUFFERED = "1"
-PORT = "5000"
-
-[[services.ports]]
-port = 5000
-handler = "http"
