@@ -131,23 +131,58 @@ This system demonstrates advanced concepts in:
 - AutoML for automated retraining
 - Model versioning and registry
 
-## 🚀 Quick Start
+## 🚀 Deployment
 
-### Prerequisites
-- Python 3.8 or higher
-- pip package manager
-- Git
-- 4GB+ RAM recommended
+### 🚂 Railway (Recommended)
 
-### One-Command Setup
+1. **Fork/Clone** this repository
+2. **Connect** your GitHub account to [Railway](https://railway.app)
+3. **New Project** → **Deploy from GitHub repo**
+4. **Select** this repository
+5. **Add Environment Variables** (if needed):
+   ```
+   FLASK_ENV=production
+   PYTHONUNBUFFERED=1
+   PORT=5000
+   ```
+6. **Deploy** - Railway will automatically build and deploy
+
+**Features:**
+- ✅ Automatic builds on git push
+- ✅ Free tier available
+- ✅ Built-in CI/CD
+- ✅ Custom domains
+- ✅ Environment management
+
+### 🐳 Docker Deployment
+
 ```bash
-git clone https://github.com/yourusername/AI-Powered-Transaction-Fraud-Detection-System.git
-cd AI-Powered-Transaction-Fraud-Detection-System
-pip install -r requirements.txt
-python app.py
+# Build and run locally
+docker build -t fraud-detection .
+docker run -p 5000:5000 fraud-detection
+
+# Or use docker-compose
+docker-compose up
 ```
 
-Access the dashboard at: `http://localhost:5000`
+### 🖥️ Local Development
+
+```bash
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the application
+python app.py
+
+# Or use the startup scripts
+# Windows
+start-project.bat
+
+# PowerShell
+start-project.ps1
+```
+
+Access the application at [http://localhost:5000](http://localhost:5000)
 
 ## 📁 Project Structure
 

@@ -1,4 +1,4 @@
-# Use Python 3.8 slim image
+# Use Python 3.8 slim image for Railway compatibility
 FROM python:3.8-slim
 
 # Set working directory
@@ -23,7 +23,7 @@ COPY . .
 # Create necessary directories
 RUN mkdir -p reports data
 
-# Expose port
+# Expose port (Railway uses $PORT env var)
 EXPOSE 5000
 
 # Set environment variables
@@ -34,6 +34,3 @@ ENV PYTHONUNBUFFERED=1
 # Health check
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:5000/ || exit 1
-
-# Run application with gunicorn optimized for memory constraints
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--workers", "1", "--timeout", "300", "--max-requests", "100", "--max-requests-jitter", "10", "--preload", "app:app"]
