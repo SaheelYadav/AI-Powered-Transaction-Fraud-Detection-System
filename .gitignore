@@ -36,6 +36,7 @@ Thumbs.db
 
 # Jupyter
 .ipynb_checkpoints/
+*.ipynb
 
 # Requirements backup
 requirments.txt
