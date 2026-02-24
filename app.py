@@ -109,6 +109,13 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
+# Print startup message for debugging
+print("=" * 50)
+print("🛡️ AI Fraud Detection System Starting...")
+print(f"📊 Models loaded: ISO={iso_forest is not None}, XGB={xgb is not None}")
+print(f"🌐 Server will be available at: http://0.0.0.0:5000")
+print("=" * 50)
+
 # Initialize components with error handling
 try:
     iso_forest = joblib.load('models/isolation_forest.pkl')
