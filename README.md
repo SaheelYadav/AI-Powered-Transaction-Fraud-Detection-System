@@ -318,10 +318,30 @@ mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./
 - ✅ Launches the main Flask application
 - ✅ Opens browser automatically at `http://127.0.0.1:5000`
 
-#### **🔧 Option 2: Manual Setup**
+#### **🔧 Option 2: Manual Setup (Advanced Users)**
+
+**Terminal 1 - Start MLflow Server:**
 ```bash
+# Activate virtual environment first
+venv\Scripts\activate
+
+# Start MLflow tracking server
+mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5001
+```
+
+**Terminal 2 - Start Flask Application:**
+```bash
+# Open NEW terminal window
+# Activate virtual environment
+venv\Scripts\activate
+
+# Start the main application
 python app.py
 ```
+
+**📊 Access Points:**
+- **Main Dashboard:** `http://127.0.0.1:5000`
+- **MLflow Tracking:** `http://127.0.0.1:5001`
 
 ### 6️⃣ Access the Dashboard
 Open your browser and navigate to: `http://127.0.0.1:5000`
@@ -329,9 +349,21 @@ Open your browser and navigate to: `http://127.0.0.1:5000`
 ## 🎮 Usage
 
 ### Starting the System
-1. **Launch the Flask application**: `python app.py`
-2. **Open the dashboard**: Visit `http://localhost:5000`
-3. **Monitor transactions**: View real-time transaction feed
+
+#### **🚀 Option 1: One-Click (Recommended)**
+```bash
+.\start-project.bat
+```
+
+#### **🔧 Option 2: Manual (Two Terminal Setup)**
+**Terminal 1:** `mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./mlruns --host 0.0.0.0 --port 5001`
+
+**Terminal 2:** `python app.py`
+
+#### **📊 Access Points:**
+1. **Main Dashboard**: `http://localhost:5000` - Fraud detection interface
+2. **MLflow Tracking**: `http://localhost:5001` - Model experiment tracking
+3. **Monitor transactions**: View real-time transaction feed and risk scores
 4. **Analyze patterns**: Use the network graph and charts
 5. **Generate reports**: Create SAR PDFs for high-risk transactions
 
