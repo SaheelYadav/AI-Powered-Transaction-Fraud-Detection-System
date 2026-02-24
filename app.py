@@ -182,7 +182,22 @@ except Exception as e:
 
 @app.route('/')
 def dashboard():
-    return render_template('dashboard.html')
+    try:
+        return render_template('dashboard.html')
+    except Exception as e:
+        # Fallback for Hugging Face deployment
+        return f"""
+        <!DOCTYPE html>
+        <html>
+        <head><title>AI Fraud Detection System</title></head>
+        <body>
+            <h1>🛡️ AI-Powered Transaction Fraud Detection System</h1>
+            <p>System is running successfully!</p>
+            <p>Models loaded: Isolation Forest={iso_forest is not None}, XGBoost={xgb is not None}</p>
+            <p><a href="/health">Health Check</a></p>
+        </body>
+        </html>
+        """
 
 @app.route('/health')
 def health_check():
