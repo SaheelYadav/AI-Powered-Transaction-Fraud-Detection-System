@@ -18,9 +18,11 @@ mlruns/
 mlartifacts/
 mlflow.db
 
-# Model artifacts (optional – keep if asked by reviewer)
-# trained_models/*.pkl
-# models/*.pt
+# Model artifacts - exclude all binary model files for HF deployment
+trained_models/*.pkl
+models/*.pkl
+models/*.pt
+models/*.backup
 
 # OS
 .DS_Store
