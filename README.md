@@ -8,9 +8,23 @@
 
 A production-grade, real-time financial fraud detection system that combines multiple machine learning approaches with explainable AI to identify suspicious transactions with high accuracy and transparency.
 
-## � Try it Live on Hugging Face Spaces
+## 🚀 Quick Start (Windows)
 
-[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-spaces-sm.svg)](https://huggingface.co/spaces/your-username/fraud-detection-system)
+**⚡ One-Click Setup:**
+```bash
+# Just double-click this file or run:
+.\start-project.bat
+```
+**✅ Automatically does everything:**
+- Creates virtual environment
+- Installs all dependencies  
+- Starts MLflow server
+- Launches Flask app
+- Opens browser at `http://127.0.0.1:5000`
+
+## 🤗 Try it Live on Hugging Face Spaces
+
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-spaces-sm.svg)](https://huggingface.co/spaces/Learnerbegginer/fraud-detection-system)
 
 ## �📋 Table of Contents
 
@@ -291,6 +305,20 @@ mlflow server --backend-store-uri sqlite:///mlflow.db --default-artifact-root ./
 ```
 
 ### 5️⃣ Run the Application
+
+#### **🚀 Option 1: Quick Start with Batch File (Recommended for Windows)**
+```bash
+# Double-click or run from command line
+.\start-project.bat
+```
+**What the batch file does:**
+- ✅ Creates and activates virtual environment automatically
+- ✅ Installs all required dependencies
+- ✅ Starts MLflow tracking server in new window
+- ✅ Launches the main Flask application
+- ✅ Opens browser automatically at `http://127.0.0.1:5000`
+
+#### **🔧 Option 2: Manual Setup**
 ```bash
 python app.py
 ```
