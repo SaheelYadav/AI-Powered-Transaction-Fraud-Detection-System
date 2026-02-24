@@ -2,14 +2,19 @@ from flask import Flask, render_template, request, jsonify
 import numpy as np
 import random
 from datetime import datetime
+import threading
+import time
 
 app = Flask(__name__)
 
-# Demo transaction generator
+# Global transactions list (like your main app)
+TRANSACTIONS = []
+
+# Demo transaction generator (same as your main app)
 def generate_demo_transaction():
     return {
         "TransactionID": f"TX{random.randint(100000, 999999)}",
-        "AccountID": f"AC{random.randint(100000, 999999)}",
+        "AccountID": f"AC{random.randint(10000, 99999)}",
         "TransactionAmount": round(random.uniform(10, 5000), 2),
         "TransactionDate": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "TransactionType": random.choice(["Debit", "Credit"]),
@@ -17,6 +22,28 @@ def generate_demo_transaction():
         "DeviceID": f"DEV{random.randint(100, 999)}",
         "MerchantID": f"MER{random.randint(1000, 9999)}"
     }
+
+# Background transaction generator (like your main app)
+def transaction_generator_loop():
+    while True:
+        txn = generate_demo_transaction()
+        TRANSACTIONS.insert(0, txn)
+        
+        # keep only latest 20 transactions
+        if len(TRANSACTIONS) > 20:
+            TRANSACTIONS.pop()
+        
+        time.sleep(random.randint(120, 300))  # 2–5 minutes
+
+# Start background thread (like your main app)
+threading.Thread(
+    target=transaction_generator_loop,
+    daemon=True
+).start()
+
+# Preload initial transactions for better UX (like your main app)
+for _ in range(5):
+    TRANSACTIONS.append(generate_demo_transaction())
 
 # Demo ML predictions
 def predict_fraud_risk(transaction):
@@ -50,20 +77,24 @@ def predict_fraud_risk(transaction):
 
 @app.route('/')
 def index():
-    # Pre-populate with some initial transactions
-    initial_transactions = [generate_demo_transaction() for _ in range(10)]
-    return render_template('dashboard.html', transactions=initial_transactions)
+    # Return current transactions from global list (like your main app)
+    return render_template('dashboard.html')
 
 @app.route('/api/transactions')
 def get_transactions():
     # Get days parameter from query string
     days = request.args.get('days', default=7, type=int)
     
-    # Generate demo transactions based on days
-    num_transactions = min(days * 3, 50)  # 3 transactions per day, max 50
-    transactions = [generate_demo_transaction() for _ in range(num_transactions)]
+    # Return transactions from global list (like your main app)
+    # Filter by days if needed
+    if days > 0:
+        cutoff_time = datetime.now().timestamp() - (days * 24 * 60 * 60)
+        filtered_transactions = [txn for txn in TRANSACTIONS 
+                            if datetime.strptime(txn["TransactionDate"], "%Y-%m-%d %H:%M:%S").timestamp() > cutoff_time]
+    else:
+        filtered_transactions = TRANSACTIONS
     
-    return jsonify(transactions)
+    return jsonify(filtered_transactions)
 
 @app.route('/api/analyze', methods=['POST'])
 def analyze_transaction():
