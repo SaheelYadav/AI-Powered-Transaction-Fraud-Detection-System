@@ -12,6 +12,7 @@ TRANSACTIONS = []
 
 # Demo transaction generator (same as your main app)
 def generate_demo_transaction():
+    risk = round(random.uniform(0.05, 0.95), 2)
     return {
         "TransactionID": f"TX{random.randint(100000, 999999)}",
         "AccountID": f"AC{random.randint(10000, 99999)}",
@@ -20,7 +21,9 @@ def generate_demo_transaction():
         "TransactionType": random.choice(["Debit", "Credit"]),
         "Location": random.choice(["New York, NY", "Los Angeles, CA", "Chicago, IL", "Houston, TX"]),
         "DeviceID": f"DEV{random.randint(100, 999)}",
-        "MerchantID": f"MER{random.randint(1000, 9999)}"
+        "MerchantID": f"MER{random.randint(1000, 9999)}",
+        "RiskScore": risk,
+        "Status": "Flagged" if risk > 0.7 else "Approved"
     }
 
 # Background transaction generator (like your main app)
@@ -42,7 +45,7 @@ threading.Thread(
 ).start()
 
 # Preload initial transactions for better UX (like your main app)
-for _ in range(10):
+for _ in range(20):
     TRANSACTIONS.append(generate_demo_transaction())
 
 print(f"Started with {len(TRANSACTIONS)} initial transactions")
