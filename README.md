@@ -188,7 +188,7 @@ Access the application at [http://localhost:5000](http://localhost:5000)
 #### 2. Upload Your Code
 ```bash
 # Option 1: Git (Recommended)
-git clone https://huggingface.co/spaces/your-username/fraud-detection-system
+git clone https://huggingface.co/spaces/Learnerbegginer/fraud-detection-system
 cd fraud-detection-system
 # Copy all your files here
 git add .
@@ -202,7 +202,7 @@ git push
 #### 3. Automatic Deployment
 - Hugging Face will automatically detect the Dockerfile
 - Build process starts automatically
-- Your app will be live at: `https://your-username.hf.space/fraud-detection-system`
+- Your app will be live at: `https://huggingface.co/spaces/--------/fraud-detection-system`
 
 #### 4. Environment Variables (Optional)
 Add these in your Space settings if needed:
@@ -263,7 +263,7 @@ AI-Powered-Transaction-Fraud-Detection-System/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/AI-Powered-Transaction-Fraud-Detection-System.git
+git clone https://github.com/SaheelYadavAI-Powered-Transaction-Fraud-Detection-System.git
 cd AI-Powered-Transaction-Fraud-Detection-System
 ```
 
@@ -484,12 +484,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Contact
 
 - **GitHub**: [SaheelYadav](https://github.com/SaheelYadav)
-- **LinkedIn**: [Saheel Yadav](https://linkedin.com/in/saheel-yadav)
-- **Email**: saheel.yadav@example.com
+- **LinkedIn**: [Saheel Yadav](https://www.linkedin.com/in/saheel-yadav-ai-ml/)
+- **Email**: saheelyadav67@gmail.com
 
 ---
 
-⭐ If you find this project useful, please give it a star on [GitHub](https://github.com/SaheelYadav/AI-Powered-Transaction-Fraud-Detection-System) and try it live on [Hugging Face Spaces](https://huggingface.co/spaces/your-username/fraud-detection-system)!
+⭐ If you find this project useful, please give it a star on [GitHub](https://github.com/SaheelYadav/AI-Powered-Transaction-Fraud-Detection-System) and try it live on [Hugging Face Spaces](https://huggingface.co/spaces/Learnerbegginer/fraud-detection-system)!
 - **Throughput**: 1000+ transactions/second
 - **Memory Usage**: < 2GB RAM
 - **Model Training**: < 5 minutes for 100k records
