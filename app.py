@@ -184,6 +184,20 @@ except Exception as e:
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/health')
+def health_check():
+    """Health check endpoint for Hugging Face"""
+    return jsonify({
+        'status': 'healthy',
+        'timestamp': datetime.now().isoformat(),
+        'models_loaded': {
+            'isolation_forest': iso_forest is not None,
+            'xgboost': xgb is not None,
+            'gnn': gnn_model is not None,
+            'shap_explainer': shap_explainer is not None
+        }
+    })
+
 @app.route('/api/analyze', methods=['POST'])
 def analyze_transaction():
     data = request.json
