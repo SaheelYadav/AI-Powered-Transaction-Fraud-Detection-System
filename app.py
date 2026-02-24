@@ -75,6 +75,12 @@ except FileNotFoundError:
     print("Warning: XGBoost model not found. Creating dummy model.")
     xgb = None
 
+try:
+    random_forest = joblib.load('models/random_forest.pkl')
+except FileNotFoundError:
+    print("Warning: Random Forest model not found. Creating dummy model.")
+    random_forest = None
+
 # Load SHAP explainer if available (optional)
 try:
     shap_explainer = joblib.load('models/shap_explainer.pkl')
