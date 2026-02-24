@@ -152,7 +152,7 @@ features = ['TransactionAmount', 'TransactionDuration', 'LoginAttempts',
             'AmountDeviation', 'DurationDeviation', 'TransactionType', 
             'Location', 'DeviceID', 'MerchantID', 'Channel', 'CustomerOccupation']
 
-# Background tasks
+# Background tasks - disabled for Hugging Face deployment
 def auto_retrain():
     while True:
         try:
@@ -163,20 +163,18 @@ def auto_retrain():
             app.logger.error(f"AutoML retraining failed: {str(e)}")
         time.sleep(7 * 24 * 60 * 60)  # Run weekly
 
-# Start background thread
-retrain_thread = threading.Thread(target=auto_retrain, daemon=True)
-retrain_thread.start()
+# Skip background thread for Hugging Face deployment
+# retrain_thread = threading.Thread(target=auto_retrain, daemon=True)
+# retrain_thread.start()
 
 
 # Initialize AutoML Trainer with proper error handling
 try:
     automl_trainer = AutoMLTrainer("data/bank_transactions_data_2.csv")
     
-    # Check if models exist, if not train initial models
-    required_models = ['isolation_forest.pkl', 'xgboost.pkl', 'shap_explainer.pkl']
-    if not all(os.path.exists(f"trained_models/{model}") for model in required_models):
-        logger.info("Initial models not found, training initial models...")
-        automl_trainer.train_models()
+    # Skip initial model training for Hugging Face deployment
+    # Models will be created on-demand if needed
+    logger.info("AutoML trainer initialized - skipping initial training for deployment")
 except Exception as e:
     logger.error(f"Failed to initialize AutoML trainer: {str(e)}")
     # Continue without AutoML trainer - app will work with dummy models
