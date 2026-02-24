@@ -50,12 +50,19 @@ def predict_fraud_risk(transaction):
 
 @app.route('/')
 def index():
-    return render_template('dashboard.html')
+    # Pre-populate with some initial transactions
+    initial_transactions = [generate_demo_transaction() for _ in range(10)]
+    return render_template('dashboard.html', transactions=initial_transactions)
 
 @app.route('/api/transactions')
 def get_transactions():
-    # Generate demo transactions
-    transactions = [generate_demo_transaction() for _ in range(20)]
+    # Get days parameter from query string
+    days = request.args.get('days', default=7, type=int)
+    
+    # Generate demo transactions based on days
+    num_transactions = min(days * 3, 50)  # 3 transactions per day, max 50
+    transactions = [generate_demo_transaction() for _ in range(num_transactions)]
+    
     return jsonify(transactions)
 
 @app.route('/api/analyze', methods=['POST'])
