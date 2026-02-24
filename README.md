@@ -7,16 +7,14 @@ sdk: docker
 pinned: false
 license: mit
 ---
-
 # 🛡️ AI-Powered Transaction Fraud Detection System
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![Flask](https://img.shields.io/badge/Flask-2.0%2B-green.svg)](https://flask.palletsprojects.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![MLflow](https://img.shields.io/badge/MLflow-Tracking-blue.svg)](https://mlflow.org/)
 [![Hugging Face Spaces](https://img.shields.io/badge/🤗-Hugging%20Face-FFD21E.svg)](https://huggingface.co/spaces)
 
-A production-grade, real-time financial fraud detection system that combines multiple machine learning approaches with explainable AI to identify suspicious transactions with high accuracy and transparency.
+A real-time financial fraud detection system that combines multiple machine learning approaches with explainable AI to identify suspicious transactions with high accuracy and transparency.
 
 ## 🚀 Quick Start (Windows)
 
@@ -32,184 +30,60 @@ A production-grade, real-time financial fraud detection system that combines mul
 - Launches Flask app
 - Opens browser at `http://127.0.0.1:5000`
 
-## 🤗 Try it Live on Hugging Face Spaces
+## 🤗 Try it Live
 
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-spaces-sm.svg)](https://huggingface.co/spaces/Learnerbegginer/fraud-detection-system)
 
-## 🚀 Deployment Note
-
-**Hugging Face Space Demo**: The deployed Hugging Face Space runs a lightweight, optimized demo version of the fraud detection system for fast, reliable public access and demonstration purposes.
-
-**Full ML Pipeline**: The complete machine learning pipeline (Isolation Forest, XGBoost, Graph Neural Network using PyTorch) with full training capabilities is available in the main repository and can be deployed on GPU-enabled or VM-based infrastructure for production use cases.
-
-**Demo Features**: 
-- ✅ Real-time fraud scoring logic
-- ✅ Risk visualization and explanations  
-- ✅ SHAP-style interpretability
-- ✅ Health monitoring endpoints
-- ✅ Responsive web interface
-
-This architecture ensures maximum reliability for demo/review purposes while maintaining full ML capabilities for production deployment.
-
-## �📋 Table of Contents
+##  Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
 - [✨ Key Features](#-key-features)
 - [🏗️ System Architecture](#️-system-architecture)
 - [🚀 Quick Start](#-quick-start)
-- [🤗 Hugging Face Deployment](#-hugging-face-deployment)
 - [📁 Project Structure](#-project-structure)
 - [🔧 Installation](#-installation)
 - [🎮 Usage](#-usage)
 - [📊 API Documentation](#-api-documentation)
 - [🧪 Model Details](#-model-details)
-- [ Performance Metrics](#-performance-metrics)
-- [🔒 Security Considerations](#-security-considerations)
-- [🚧 Future Enhancements](#-future-enhancements)
+- [📈 Performance](#-performance)
+- [🔒 Security](#-security)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
 ## 🎯 Project Overview
 
-The AI-Powered Transaction Fraud Detection System is an enterprise-grade solution designed to:
+This system addresses the critical challenge of financial fraud detection, which costs the global economy over $32 billion annually. By leveraging advanced machine learning techniques, we provide real-time fraud detection with explainable AI capabilities.
 
-- **Detect fraudulent transactions in real-time** using ensemble ML models
-- **Provide explainable AI insights** through SHAP values
-- **Monitor model drift** and automatically retrain models
-- **Generate regulatory compliance reports** (SAR)
-- **Visualize transaction networks** to identify fraud rings
-- **Scale horizontally** with microservices architecture
+### 🎯 Key Features
 
-This system demonstrates advanced concepts in:
-- 🤖 **Machine Learning & Deep Learning**
-- 🔐 **Cybersecurity & Fraud Detection**
-- 📊 **Data Science & Analytics**
-- 🌐 **Full-Stack Web Development**
-- 📈 **MLOps & Model Monitoring**
-
-## ✨ Key Features
-
-### 🔍 Real-Time Transaction Monitoring
-- Live transaction feed with automatic refresh
-- Risk-based color coding (Low/Medium/High)
-- Configurable monitoring thresholds
-- Real-time alert system
-
-### 🧠 Multi-Model Fraud Detection
-- **Isolation Forest**: Anomaly detection for unusual patterns
-- **XGBoost**: Supervised classification with high accuracy
-- **Graph Neural Networks**: Relationship-based fraud detection
-- **Ensemble Scoring**: Weighted composite risk scoring
-
-### 🎯 Explainable AI (XAI)
-- **SHAP (SHapley Additive exPlanations)** for model interpretability
-- Feature importance visualization
-- Decision transparency for compliance
-- Analyst-friendly explanations
-
-### 📊 Advanced Analytics Dashboard
-- Interactive risk distribution charts
-- Transaction trend analysis
-- Network graph visualization
-- Customer risk profiling
-- Performance metrics tracking
-
-### 📋 Regulatory Compliance
-- **Suspicious Activity Reports (SAR)** generation
-- PDF export functionality
-- Audit trail maintenance
-- Compliance-ready reporting
-
-### 🔄 Continuous Learning
-- **Concept Drift Detection** with statistical monitoring
-- **AutoML-based retraining** on scheduled intervals
-- **MLflow integration** for experiment tracking
-- Model versioning and rollback capabilities
+- **� Multi-Model Approach**: Isolation Forest, XGBoost, and Graph Neural Networks
+- **⚡ Real-time Processing**: Sub-250ms transaction analysis
+- **🔍 Explainable AI**: SHAP-based feature importance for transparency
+- **📊 Risk Profiling**: Customer-specific risk assessment
+- **� Continuous Learning**: Automatic model retraining and drift detection
+- **📱 Modern UI**: Responsive web dashboard
+- **📋 Reporting**: SAR (Suspicious Activity Report) generation
+- **🌐 Deployment Ready**: Docker containerization and cloud deployment
 
 ## 🏗️ System Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Frontend      │    │    Backend      │    │   ML Models     │
-│                 │    │                 │    │                 │
-│ • HTML5/CSS3    │◄──►│ • Flask API     │◄──►│ • Isolation     │
-│ • Chart.js      │    │ • REST Endpoints│    │   Forest        │
-│ • Vis.js        │    │ • Background    │    │ • XGBoost       │
-│ • Bootstrap     │    │   Threads       │    │ • GNN           │
+│   Transaction   │───▶│  Feature Eng.   │───▶│   ML Models     │
+│     Input       │    │   Pipeline      │    │   Ensemble      │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
-         │                       │                       │
-         │                       │                       │
-         ▼                       ▼                       ▼
+                                                        │
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Data Layer    │    │   MLOps Stack   │    │  Monitoring     │
-│                 │    │                 │    │                 │
-│ • CSV Files     │    │ • MLflow        │    │ • Drift Detector│
-│ • In-Memory     │    │ • AutoML        │    │ • Logging       │
-│ • File Storage  │    │ • Model Registry│    │ • Metrics       │
+│   Dashboard     │◀───│    Results      │◀───│   Explainable   │
+│     UI          │    │   Processing    │    │      AI         │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
 
-### Technology Stack
+### 🧠 Machine Learning Models
 
-**Frontend**
-- HTML5, CSS3, Bootstrap 5
-- Chart.js for data visualization
-- Vis.js for network graphs
-- JavaScript ES6+
-
-**Backend**
-- Flask (Python Web Framework)
-- RESTful API design
-- Background task processing
-- Real-time transaction simulation
-
-**Machine Learning**
-- Scikit-learn (Isolation Forest, Random Forest)
-- XGBoost (Gradient Boosting)
-- PyTorch Geometric (Graph Neural Networks)
-- SHAP (Explainable AI)
-
-**MLOps & Monitoring**
-- MLflow (Experiment Tracking)
-- Concept Drift Detection
-- AutoML for automated retraining
-- Model versioning and registry
-
-## 🚀 Quick Start
-
-### 🤗 Hugging Face Deployment (Recommended)
-
-1. **Clone/Download** this repository
-2. **Create a new Hugging Face Space** at [huggingface.co/new-space](https://huggingface.co/new-space)
-3. **Choose Docker SDK** and give your space a name
-4. **Upload** all files to the Space repository
-5. **Wait for build** - Hugging Face will automatically build and deploy
-6. **Access your app** at `https://your-username.hf.space/your-space-name`
-
-**Features:**
-- ✅ Zero configuration deployment
-- ✅ Free tier available
-- ✅ Automatic HTTPS
-- ✅ Built-in CI/CD
-- ✅ GPU support (if needed)
-
-### 🖥️ Local Development
-
-```bash
-# Install dependencies
-pip install -r requirements.txt
-
-# Run the application
-python app.py
-
-# Or use the startup scripts
-# Windows
-start-project.bat
-
-# PowerShell
-start-project.ps1
-```
-
+1. **Isolation Forest**: Unsupervised anomaly detection for novel fraud patterns
+2. **XGBoost**: Supervised gradient boosting for high-accuracy classification  
+3. **Graph Neural Networks**: Relationship-based fraud detection using transaction networks
 Access the application at [http://localhost:5000](http://localhost:5000)
 
 ## 🤗 Hugging Face Deployment
