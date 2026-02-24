@@ -1,4 +1,5 @@
 # Core Web Framework
+# Updated for Hugging Face Spaces deployment
 Flask==2.3.3
 Werkzeug==2.3.7
 gunicorn==21.2.0
