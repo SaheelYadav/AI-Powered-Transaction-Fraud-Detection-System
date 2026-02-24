@@ -42,8 +42,10 @@ threading.Thread(
 ).start()
 
 # Preload initial transactions for better UX (like your main app)
-for _ in range(5):
+for _ in range(10):
     TRANSACTIONS.append(generate_demo_transaction())
+
+print(f"Started with {len(TRANSACTIONS)} initial transactions")
 
 # Demo ML predictions
 def predict_fraud_risk(transaction):
@@ -111,7 +113,20 @@ def analyze_transaction():
 
 @app.route('/api/health')
 def health_check():
-    return jsonify({"status": "healthy", "timestamp": datetime.now().isoformat()})
+    return jsonify({
+        "status": "healthy", 
+        "timestamp": datetime.now().isoformat(),
+        "transactions_count": len(TRANSACTIONS),
+        "background_thread_running": True
+    })
+
+@app.route('/api/debug')
+def debug_info():
+    return jsonify({
+        "transactions": TRANSACTIONS,
+        "count": len(TRANSACTIONS),
+        "message": f"Debug info - {len(TRANSACTIONS)} transactions available"
+    })
 
 if __name__ == '__main__':
     app.run(debug=False, host='0.0.0.0', port=7860)
