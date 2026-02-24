@@ -36,6 +36,21 @@ A production-grade, real-time financial fraud detection system that combines mul
 
 [![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-spaces-sm.svg)](https://huggingface.co/spaces/Learnerbegginer/fraud-detection-system)
 
+## 🚀 Deployment Note
+
+**Hugging Face Space Demo**: The deployed Hugging Face Space runs a lightweight, optimized demo version of the fraud detection system for fast, reliable public access and demonstration purposes.
+
+**Full ML Pipeline**: The complete machine learning pipeline (Isolation Forest, XGBoost, Graph Neural Network using PyTorch) with full training capabilities is available in the main repository and can be deployed on GPU-enabled or VM-based infrastructure for production use cases.
+
+**Demo Features**: 
+- ✅ Real-time fraud scoring logic
+- ✅ Risk visualization and explanations  
+- ✅ SHAP-style interpretability
+- ✅ Health monitoring endpoints
+- ✅ Responsive web interface
+
+This architecture ensures maximum reliability for demo/review purposes while maintaining full ML capabilities for production deployment.
+
 ## �📋 Table of Contents
 
 - [🎯 Project Overview](#-project-overview)
