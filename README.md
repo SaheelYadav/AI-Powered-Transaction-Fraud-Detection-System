@@ -1,3 +1,13 @@
+---
+title: AI Fraud Detection System
+emoji: 🛡️
+colorFrom: blue
+colorTo: red
+sdk: docker
+pinned: false
+license: mit
+---
+
 # 🛡️ AI-Powered Transaction Fraud Detection System
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
