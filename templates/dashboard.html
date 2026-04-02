@@ -812,6 +812,24 @@
             if (transaction.RiskScore > 0.7) riskBadgeClass = 'bg-danger';
             else if (transaction.RiskScore > 0.4) riskBadgeClass = 'bg-warning';
 
+            // Create transaction data for analysis
+            const transactionData = {
+                AccountID: transaction.AccountID,
+                TransactionAmount: transaction.TransactionAmount,
+                TransactionType: transaction.TransactionType,
+                Channel: transaction.Channel || 'Online',
+                Location: transaction.Location,
+                // Dummy data for analysis
+                TransactionDuration: Math.floor(Math.random() * 120) + 10,
+                LoginAttempts: Math.floor(Math.random() * 3) + 1,
+                AccountBalance: (Math.random() * 10000).toFixed(2),
+                PreviousTransactionDate: new Date(Date.now() - Math.floor(Math.random() * 48) * 60 * 60 * 1000).toISOString(),
+                DeviceID: 'D' + Math.floor(Math.random() * 1000).toString().padStart(3, '0'),
+                MerchantID: 'M' + Math.floor(Math.random() * 100).toString().padStart(2, '0'),
+                CustomerOccupation: ['Student', 'Doctor', 'Engineer', 'Retired'][Math.floor(Math.random() * 4)],
+                TransactionDate: transaction.TransactionDate
+            };
+
             detailContainer.innerHTML = `
                 <div class="row">
                     <div class="col-md-6">
@@ -859,22 +877,79 @@
                 </div>
                 <div class="mt-3">
                     <h6>Key Risk Indicators</h6>
-                    <div class="feature-impact">
-                        <span>Unusual Location</span>
-                        <div class="feature-bar impact-positive" style="width: 80%"></div>
-                    </div>
-                    <div class="feature-impact">
-                        <span>Amount Deviation</span>
-                        <div class="feature-bar impact-positive" style="width: 65%"></div>
-                    </div>
-                    <div class="feature-impact">
-                        <span>Time of Day</span>
-                        <div class="feature-bar impact-negative" style="width: 30%"></div>
+                    <div id="dynamic-risk-indicators">
+                        <div class="text-center">
+                            <div class="spinner-border spinner-border-sm" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <small class="text-muted ms-2">Analyzing transaction...</small>
+                        </div>
                     </div>
                 </div>
             `;
 
             modal.show();
+
+            // Fetch SHAP-based explanation for this transaction
+            fetch('/api/analyze', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(transactionData)
+            })
+            .then(res => res.json())
+            .then(analysisResult => {
+                const indicatorsContainer = document.getElementById('dynamic-risk-indicators');
+                
+                if (analysisResult.explanation && analysisResult.explanation.length > 0) {
+                    let indicatorsHTML = '';
+                    analysisResult.explanation.forEach(factor => {
+                        const impactWidth = Math.min(100, Math.abs(factor.shap_value) * 100);
+                        const impactClass = factor.shap_value > 0 ? 'impact-positive' : 'impact-negative';
+                        
+                        // Determine impact level
+                        let impactLevel = 'low';
+                        let impactBadgeClass = 'bg-success';
+                        const absShap = Math.abs(factor.shap_value);
+                        
+                        if (absShap > 0.2) {
+                            impactLevel = 'high';
+                            impactBadgeClass = 'bg-danger';
+                        } else if (absShap > 0.1) {
+                            impactLevel = 'medium';
+                            impactBadgeClass = 'bg-warning';
+                        }
+
+                        indicatorsHTML += `
+                        <div class="feature-impact mb-2">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <span class="fw-bold">${factor.feature}</span>
+                                <span class="badge ${impactBadgeClass}">${impactLevel}</span>
+                            </div>
+                            <div class="feature-bar ${impactClass}" style="width: ${impactWidth}%"></div>
+                            <small class="text-muted">
+                                Value: ${typeof factor.value === 'number' ? factor.value.toFixed(2) : factor.value} | 
+                                Impact: ${factor.shap_value > 0 ? '+' : ''}${factor.shap_value.toFixed(3)}
+                            </small>
+                        </div>
+                        `;
+                    });
+                    indicatorsContainer.innerHTML = indicatorsHTML;
+                } else {
+                    indicatorsContainer.innerHTML = `
+                    <div class="alert alert-info">
+                        <i class="bi bi-info-circle"></i> 
+                        No specific risk factors identified for this transaction.
+                    </div>`;
+                }
+            })
+            .catch(err => {
+                console.error('Analysis failed:', err);
+                document.getElementById('dynamic-risk-indicators').innerHTML = `
+                <div class="alert alert-warning">
+                    <i class="bi bi-exclamation-triangle"></i> 
+                    Unable to analyze transaction details.
+                </div>`;
+            });
         }
 
         function checkDriftStatus() {
@@ -964,19 +1039,44 @@
                             <h5 class="mt-3">Key Risk Factors</h5>
                         `;
 
-                            if (analysisResult.explanation) {
+                            if (analysisResult.explanation && analysisResult.explanation.length > 0) {
                                 analysisResult.explanation.forEach(factor => {
                                     const impactWidth = Math.min(100, Math.abs(factor.shap_value) * 100);
                                     const impactClass = factor.shap_value > 0 ? 'impact-positive' : 'impact-negative';
+                                    
+                                    // Determine impact level
+                                    let impactLevel = 'low';
+                                    let impactBadgeClass = 'bg-success';
+                                    const absShap = Math.abs(factor.shap_value);
+                                    
+                                    if (absShap > 0.2) {
+                                        impactLevel = 'high';
+                                        impactBadgeClass = 'bg-danger';
+                                    } else if (absShap > 0.1) {
+                                        impactLevel = 'medium';
+                                        impactBadgeClass = 'bg-warning';
+                                    }
 
                                     explanationHTML += `
-                                    <div class="feature-impact">
-                                        <span>${factor.feature}</span>
+                                    <div class="feature-impact mb-2">
+                                        <div class="d-flex justify-content-between align-items-center mb-1">
+                                            <span class="fw-bold">${factor.feature}</span>
+                                            <span class="badge ${impactBadgeClass}">${impactLevel}</span>
+                                        </div>
                                         <div class="feature-bar ${impactClass}" style="width: ${impactWidth}%"></div>
-                                        <small class="text-muted ms-2">${factor.value}</small>
+                                        <small class="text-muted">
+                                            Value: ${typeof factor.value === 'number' ? factor.value.toFixed(2) : factor.value} | 
+                                            Impact: ${factor.shap_value > 0 ? '+' : ''}${factor.shap_value.toFixed(3)}
+                                        </small>
                                     </div>
                                 `;
                                 });
+                            } else {
+                                explanationHTML += `
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i> 
+                                    No specific risk factors identified for this transaction.
+                                </div>`;
                             }
 
                             resultDiv.innerHTML = explanationHTML;

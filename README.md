@@ -69,12 +69,12 @@ This system addresses the critical challenge of financial fraud detection, which
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Transaction   │───▶│  Feature Eng.   │───▶│   ML Models     │
+│   Transaction   │───▶│  Feature Eng.   │───▶│   ML Models    │
 │     Input       │    │   Pipeline      │    │   Ensemble      │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
                                                         │
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│   Dashboard     │◀───│    Results      │◀───│   Explainable   │
+│   Dashboard     │◀───│    Results      │◀───│   Explainable  │
 │     UI          │    │   Processing    │    │      AI         │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
 ```
